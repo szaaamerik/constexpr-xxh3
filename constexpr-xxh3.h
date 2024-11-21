@@ -294,7 +294,7 @@ constexpr size_t bytes_size(T (&)[N]) noexcept {
 /// Basic interfaces
 
 template <ByteType T>
-consteval uint64_t XXH3_64bits_const(const T* input, size_t len) noexcept {
+constexpr uint64_t XXH3_64bits_const(const T* input, size_t len) noexcept {
   return XXH3_64bits_internal(
       input, len, 0, kSecret, sizeof(kSecret),
       [](const T* input, size_t len, uint64_t, const void*,
@@ -304,7 +304,7 @@ consteval uint64_t XXH3_64bits_const(const T* input, size_t len) noexcept {
 }
 
 template <ByteType T, ByteType S>
-consteval uint64_t XXH3_64bits_withSecret_const(const T* input, size_t len,
+constexpr uint64_t XXH3_64bits_withSecret_const(const T* input, size_t len,
                                                 const S* secret,
                                                 size_t secretSize) noexcept {
   return XXH3_64bits_internal(
@@ -316,7 +316,7 @@ consteval uint64_t XXH3_64bits_withSecret_const(const T* input, size_t len,
 }
 
 template <ByteType T>
-consteval uint64_t XXH3_64bits_withSeed_const(const T* input, size_t len,
+constexpr uint64_t XXH3_64bits_withSeed_const(const T* input, size_t len,
                                               uint64_t seed) noexcept {
   if (seed == 0) return XXH3_64bits_const(input, len);
   return XXH3_64bits_internal(
@@ -335,19 +335,19 @@ consteval uint64_t XXH3_64bits_withSeed_const(const T* input, size_t len,
 /// Convenient interfaces
 
 template <BytesType Bytes>
-consteval uint64_t XXH3_64bits_const(const Bytes& input) noexcept {
+constexpr uint64_t XXH3_64bits_const(const Bytes& input) noexcept {
   return XXH3_64bits_const(std::data(input), bytes_size(input));
 }
 
 template <BytesType Bytes, BytesType Secret>
-consteval uint64_t XXH3_64bits_withSecret_const(const Bytes& input,
+constexpr uint64_t XXH3_64bits_withSecret_const(const Bytes& input,
                                                 const Secret& secret) noexcept {
   return XXH3_64bits_withSecret_const(std::data(input), bytes_size(input),
                                       std::data(secret), bytes_size(secret));
 }
 
 template <BytesType Bytes>
-consteval uint64_t XXH3_64bits_withSeed_const(const Bytes& input,
+constexpr uint64_t XXH3_64bits_withSeed_const(const Bytes& input,
                                               uint64_t seed) noexcept {
   return XXH3_64bits_withSeed_const(std::data(input), bytes_size(input), seed);
 }

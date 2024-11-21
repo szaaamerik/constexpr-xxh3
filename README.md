@@ -1,6 +1,11 @@
 constexpr-xxh3
 ==============
 
+I forked this repository because I found it to be the best implementation available.<br/>
+However, the main overloads were `consteval` instead of `constexpr`, contrary to what the name suggests.<br/>
+I've made the necessary changes to align it with my requirements in this repository.
+---
+
 This is a C++20 constexpr implementation of the XXH3 64-bit variant of [xxHash](https://github.com/Cyan4973/xxHash)
 
 Three functions are implemented: `XXH3_64bits_const`, `XXH3_64bits_withSecret_const`, `XXH3_64bits_withSeed_const`.
